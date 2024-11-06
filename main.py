@@ -39,13 +39,13 @@ def save():
         messagebox.showinfo(title="Are you blind?", message= "Some of the fields are empty!!!")
     else:
         try:
-            with open("password_db.json",mode="r") as file:
+            with open("database/password_db.json", mode="r") as file:
                 data = json.load(file)
                 data.update(user_data)
-            with open("password_db.json", "w") as file:
+            with open("database/password_db.json", "w") as file:
                 json.dump(data, file, indent=4)
         except (FileNotFoundError,json.decoder.JSONDecodeError):
-            with open("password_db.json", "w") as file:
+            with open("database/password_db.json", "w") as file:
                 json.dump(user_data, file, indent=4)
         finally:
             website_input.delete(0,"end")
@@ -58,7 +58,7 @@ def save():
 def find_password():
     website = website_input.get()
     try:
-        with open("password_db.json", mode="r") as file:
+        with open("database/password_db.json", mode="r") as file:
             data = json.load(file)
         if website in data:
             messagebox.showinfo(title=website, message=f"Email : {data[website]["email"]}\n"
@@ -88,7 +88,7 @@ window.title("Password Manager")
 window.config(padx=20,pady=20)
 
 canvas = Canvas(width=200,height=200)
-logo_img = PhotoImage(file = "logo.png")
+logo_img = PhotoImage(file = "assets/logo.png")
 canvas.create_image(100,100,image = logo_img)
 canvas.grid(row = 0,column = 1)
 
